@@ -20,6 +20,15 @@
                 <td><b>Last Name:</b></td>
                 <td><input type="text" name="lastname"></td>
             </tr>
+            
+         <tr>
+        <td><b>Gender:</b></td>
+            <td>
+                <input type="radio" name="gender" value="male"> Male 
+                <input type="radio" name="gender" value="female"> Female
+            </td>
+        </tr>
+          
 
             <tr>
                 <td><b>Email:</b></td>
@@ -62,10 +71,10 @@
                 </td> </tr>
 
             <tr>
-                <td><b>Upload ID proof:</b><br>(Aadhar, PAN, Student ID)</td>
+                <td><b>Upload ID proof:</b><br>(Aadhar/PAN/StudentID)</td>
                 <td>
                     <small style="color: red;">
-                        Note: Max 70KB<br>
+                        Note: Max 256KB<br>
                         File type: jpeg, jpg, png
                     </small><br>
                     <input type="file" name="ID">
@@ -76,7 +85,7 @@
                 <td><b>Upload Signature:</b></td>
                 <td>
                     <small style="color: red;">
-                        Note: Max 70KB<br>
+                        Note: Max 50KB<br>s
                         File type: jpeg, jpg, png
                     </small><br>
                     <input type="file" name="Signature">
