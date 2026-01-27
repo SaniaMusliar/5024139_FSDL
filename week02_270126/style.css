@@ -2,12 +2,9 @@ table {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
-input[type="submit"]:hover {
-    background-color: darkgreen;
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+    background-color: grey !important;
     cursor: pointer;
 }
 
-input[type="reset"]:hover {
-    background-color: darkred;
-    cursor: pointer;
-}
