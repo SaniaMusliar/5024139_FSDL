@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Beneficiary Form</title>
+
+    <!-- Internal CSS for colors -->
+    <style>
+        body {
+            background-color: #eef2f7;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: #bb9324;
+        }
+
+        form {
+            background-color: #fffbea;
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #000000;
+           
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="file"] {
+            width: 95%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        small {
+            color: red;
+        }
+
+        input[type="submit"] {
+            background-color: green;
+            color: white;
+            padding: 6px 15px;
+            border: none;
+            font-weight: bold;
+        }
+
+        input[type="reset"] {
+            background-color: red;
+            color: white;
+            padding: 6px 15px;
+            border: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 align="center">Registration Form</h2>
+
+    <form>
+
+        First Name:<br>
+        <input type="text" name="firstname"><br><br>
+
+        Last Name:<br>
+        <input type="text" name="lastname"><br><br>
+
+        Email:<br>
+        <input type="email" name="email"><br><br>
+
+        Phone Number:<br>
+        <input type="tel" name="phone"><br><br>
+
+        Date of Birth:<br>
+        <input type="date" name="dob"><br><br>
+
+        Father Name:<br>
+        <input type="text" name="fathername"><br><br>
+
+        Mother Name:<br>
+        <input type="text" name="mothername"><br><br>
+
+        Upload Photograph:<br>
+        <small>
+            Note: File should not exceed 70KB <br>
+            File type: jpeg, jpg, png
+        </small><br>
+        <input type="file" name="Photo"><br><br>
+
+        Upload ID proof (Any 1 – Aadhar, PAN, Student ID):<br>
+        <small>
+            Note: File should not exceed 70KB <br>
+            File type: jpeg, jpg, png
+        </small><br>
+        <input type="file" name="ID"><br><br>
+
+        Upload Signature:<br>
+        <small>
+            Note: File should not exceed 70KB <br>
+            File type: jpeg, jpg, png
+        </small><br>
+        <input type="file" name="Signature"><br><br>
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+
+    </form>
+
+</body>
+</html>
