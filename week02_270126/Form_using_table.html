@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Beneficiary Form</title>  <!-- browser title -->
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Internal CSS -->
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: #000000;
+            text-decoration: underline;
+        }
+
+        table {
+            background-color: hsl(54, 100%, 90%);
+            border-collapse: collapse;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="password"] {
+            width: 95%;
+            padding: 5px;
+        }
+
+        .announcement {
+            background-color: #ff9e5e;
+            border: 1px solid #f1c40f;
+            width: 60%;
+            margin: 15px auto;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .contact {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 align="center">Registration Form</h2>
+
+    <!-- 📢 Announcement Section -->
+    <div class="announcement">
+        <b>📢 Announcement:</b><br>
+        Last date for registration is <b>31st March 2026</b>.<br>
+        Please complete the form before the deadline.
+    </div>
+
+    <form>
+        <table align="center" border="1" cellpadding="10">
+            
+            <tr>
+                <td><b>First Name:</b></td>
+                <td><input type="text" name="firstname"></td>
+            </tr>
+
+            <tr>
+                <td><b>Last Name:</b></td>
+                <td><input type="text" name="lastname"></td>
+            </tr>
+            
+            <tr>
+                <td><b>Gender:</b></td>
+                <td>
+                    <input type="radio" name="gender"> Male 
+                    <input type="radio" name="gender"> Female
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Email:</b></td>
+                <td><input type="email" name="email"></td>
+            </tr>
+
+            <tr>
+                <td><b>Phone number:</b></td>
+                <td><input type="tel" name="phone"></td>
+            </tr>
+
+            <tr>
+                <td><b>Date of birth:</b></td>
+                <td><input type="date" name="dob"></td>
+            </tr>
+
+            <tr>
+                <td><b>Address:</b></td>
+                <td><input type="text" name="address"></td>
+            </tr>
+
+            <tr>
+                <td><b>Father Name:</b></td>
+                <td><input type="text" name="fathername"></td>
+            </tr>
+
+            <tr>
+                <td><b>Mother Name:</b></td>
+                <td><input type="text" name="mothername"></td>
+            </tr>
+
+            <tr>
+                <td><b>Upload Photograph:</b></td>
+                <td>
+                    <small style="color: red;">
+                        Note: File should not exceed 70KB<br>
+                        File type: jpeg, jpg, png
+                    </small><br>
+                    <input type="file">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Password:</b></td>
+                <td><input type="password" name="pswd"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Submit"
+                        style="background-color: green; color: white; padding: 6px 20px; font-weight: bold;">
+                    <input type="reset" value="Reset"
+                        style="background-color: red; color: white; padding: 6px 20px; font-weight: bold;">
+                </td>
+            </tr>
+
+        </table>
+    </form>
+
+    <!-- 📞 Contact Section -->
+    <div class="contact">
+        <hr width="60%">
+        <p>
+            <b>Contact Us:</b><br>
+            Email: support_beneficiary@gmail.com<br>
+            Phone: +91 98765 43210
+        </p>
+    </div>
+
+</body>
+</html>

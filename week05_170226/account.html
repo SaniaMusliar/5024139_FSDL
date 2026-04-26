@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Account Creation</title>
+
+    <style>
+
+        /* =========================
+           BACKGROUND IMAGE
+        ========================== */
+        body {
+            font-family: Arial;
+            margin: 0;
+            padding: 0;
+            background-image: url("https://www.indiratrade.com/files/Blogimages/Blogimages/638822082230646562bob.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+
+        /* Dark overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: -1;
+        }
+
+        /* =========================
+           SCAM ALERT BANNER
+        ========================== */
+        .announcement {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           FORM CONTAINER
+        ========================== */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            width: 450px;
+            padding: 20px;
+            margin: auto;
+            margin-top: 30px;
+            box-shadow: 0px 0px 15px black;
+            border-radius: 10px;
+        }
+
+        input, select, textarea {
+            width: 90%;
+            padding: 8px;
+            margin: 8px;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: darkgreen;
+        }
+
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- SCAM ALERT MESSAGE -->
+<div class="announcement">
+    ⚠️ BEWARE OF SCAM! Bank never asks for OTP, PIN or Password over phone calls.
+</div>
+
+<div class="container">
+
+    <h2>Bank Account Creation Form</h2>
+
+    <input type="text" id="name" placeholder="Full Name"><br>
+    <input type="number" id="age" placeholder="Age"><br>
+    <input type="text" id="contact" placeholder="Contact Number"><br>
+    <input type="email" id="email" placeholder="Email"><br>
+
+    <textarea id="address" placeholder="Enter Address"></textarea><br>
+
+    <select id="accountType">
+        <option value="">Select Account Type</option>
+        <option>Savings</option>
+        <option>Current</option>
+    </select><br>
+
+    <input type="number" id="deposit" placeholder="Initial Deposit Amount"><br>
+
+    <h3>Nominee Details</h3>
+
+    <input type="text" id="nomineeName" placeholder="Nominee Name"><br>
+    <input type="text" id="relation" placeholder="Relation with Nominee"><br>
+
+    <button onclick="createAccount()">Create Account</button>
+
+    <div id="message"></div>
+
+</div>
+
+<script src="account.js"></script>
+
+</body>
+</html>
