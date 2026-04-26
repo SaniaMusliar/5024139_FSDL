@@ -1,0 +1,193 @@
+.modal-overlay {
+  position: static;        
+  background: none;        
+  backdrop-filter: none;   
+  display: block;          
+  padding: 0;              
+}
+
+.modal-panel {
+  background: white;
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 580px;
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  border: 1px solid var(--gray-100);
+  margin: 40px auto;       /* center nicely */
+  width: 100%;
+  max-width: 580px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 28px 32px 24px;
+  border-bottom: 1px solid var(--gray-100);
+  background: linear-gradient(to right, var(--green-50), white);
+}
+
+.modal-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  letter-spacing: -0.3px;
+}
+
+.modal-header p {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  margin-top: 3px;
+}
+
+.modal-close {
+  width: 32px; height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--gray-100);
+  color: var(--gray-600);
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.modal-close:hover {
+  background: var(--red-100);
+  color: var(--red-600);
+}
+
+.modal-form { padding: 28px 32px; }
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.modal-field-full {
+  grid-column: 1 / -1;
+}
+
+.modal-field { display: flex; flex-direction: column; gap: 6px; }
+
+.modal-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  letter-spacing: 0.02em;
+}
+
+.required { color: var(--red-500); }
+.optional { color: var(--gray-400); font-weight: 400; }
+
+.field-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.field-input-wrap input,
+.field-input-wrap select,
+.field-input-wrap textarea {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  color: var(--gray-800);
+  background: var(--gray-50);
+  transition: var(--transition);
+}
+
+.field-input-wrap input:focus,
+.field-input-wrap select:focus,
+.field-input-wrap textarea:focus {
+  border-color: var(--green-500);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.1);
+  outline: none;
+}
+
+.field-input-wrap select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.field-textarea-wrap { align-items: flex-start; }
+.field-textarea-wrap textarea { resize: none; }
+.field-textarea-wrap .field-icon { top: 12px; }
+
+.field-error input,
+.field-error select {
+  border-color: var(--red-400);
+  background: var(--red-50);
+}
+
+.field-error-msg {
+  font-size: 0.72rem;
+  color: var(--red-600);
+  font-weight: 500;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  border-top: 1px solid var(--gray-100);
+  padding-top: 20px;
+}
+
+.btn-cancel {
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--gray-200);
+  background: white;
+  color: var(--gray-600);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.btn-cancel:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+}
+
+.btn-primary {
+  padding: 10px 24px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(22,163,74,0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .modal-grid { grid-template-columns: 1fr; }
+  .modal-panel { border-radius: var(--radius-lg); }
+  .modal-form, .modal-header { padding-left: 20px; padding-right: 20px; }
+}
