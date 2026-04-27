@@ -5,7 +5,8 @@ const CATEGORIES = ['General', 'Dairy', 'Meat', 'Vegetables', 'Fruits', 'Grains'
 const UNITS = ['pcs', 'kg', 'g', 'L', 'ml', 'pack', 'box', 'bottle', 'can']
 const EMPTY_FORM = { name: '', quantity: '', unit: 'pcs', expiryDate: '', category: 'General', notes: '' }
 
-const AddItemModal = ({ onClose, onSubmit, editItem, loading }) => {
+// inline prop = true means render as plain form (no overlay), false = popup modal
+const AddItemModal = ({ onClose, onSubmit, editItem, loading, inline = false }) => {
   const [form, setForm] = useState(EMPTY_FORM)
   const [errors, setErrors] = useState({})
 
@@ -13,19 +14,21 @@ const AddItemModal = ({ onClose, onSubmit, editItem, loading }) => {
     if (editItem) {
       setForm({
         name: editItem.name || '',
-        quantity: editItem.quantity || '',
+        quantity: String(editItem.quantity || ''),
         unit: editItem.unit || 'pcs',
         expiryDate: editItem.expiryDate ? editItem.expiryDate.split('T')[0] : '',
         category: editItem.category || 'General',
         notes: editItem.notes || '',
       })
+    } else {
+      setForm(EMPTY_FORM)
     }
   }, [editItem])
 
   const validate = () => {
     const errs = {}
     if (!form.name.trim()) errs.name = 'Item name is required.'
-    if (!form.quantity || form.quantity < 1) errs.quantity = 'Quantity must be at least 1.'
+    if (!form.quantity || Number(form.quantity) < 1) errs.quantity = 'Quantity must be at least 1.'
     if (!form.expiryDate) errs.expiryDate = 'Expiry date is required.'
     setErrors(errs)
     return Object.keys(errs).length === 0
@@ -39,14 +42,126 @@ const AddItemModal = ({ onClose, onSubmit, editItem, loading }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     if (!validate()) return
-    onSubmit(form)
+    onSubmit({ ...form, quantity: Number(form.quantity) })
   }
 
-  const today = new Date().toISOString().split('T')[0]
+  const FormContent = (
+    <form onSubmit={handleSubmit} className="modal-form">
+      <div className="modal-grid">
 
+        {/* Item Name */}
+        <div className={`modal-field modal-field-full ${errors.name ? 'field-error' : ''}`}>
+          <label>Item Name <span className="required">*</span></label>
+          <div className="field-input-wrap">
+            <span className="field-icon">🏷️</span>
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="e.g. Whole Milk, Chicken Breast..."
+              autoComplete="off"
+            />
+          </div>
+          {errors.name && <span className="field-error-msg">{errors.name}</span>}
+        </div>
+
+        {/* Quantity */}
+        <div className={`modal-field ${errors.quantity ? 'field-error' : ''}`}>
+          <label>Quantity <span className="required">*</span></label>
+          <div className="field-input-wrap">
+            <span className="field-icon">🔢</span>
+            <input
+              type="number"
+              name="quantity"
+              value={form.quantity}
+              onChange={handleChange}
+              placeholder="1"
+              min="1"
+            />
+          </div>
+          {errors.quantity && <span className="field-error-msg">{errors.quantity}</span>}
+        </div>
+
+        {/* Unit */}
+        <div className="modal-field">
+          <label>Unit</label>
+          <div className="field-input-wrap">
+            <span className="field-icon">📐</span>
+            <select name="unit" value={form.unit} onChange={handleChange}>
+              {UNITS.map(u => <option key={u} value={u}>{u}</option>)}
+            </select>
+          </div>
+        </div>
+
+        {/* Expiry Date */}
+        <div className={`modal-field ${errors.expiryDate ? 'field-error' : ''}`}>
+          <label>Expiry Date <span className="required">*</span></label>
+          <div className="field-input-wrap">
+            <span className="field-icon">📅</span>
+            <input
+              type="date"
+              name="expiryDate"
+              value={form.expiryDate}
+              onChange={handleChange}
+            />
+          </div>
+          {errors.expiryDate && <span className="field-error-msg">{errors.expiryDate}</span>}
+        </div>
+
+        {/* Category */}
+        <div className="modal-field">
+          <label>Category</label>
+          <div className="field-input-wrap">
+            <span className="field-icon">🗂️</span>
+            <select name="category" value={form.category} onChange={handleChange}>
+              {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+        </div>
+
+        {/* Notes */}
+        <div className="modal-field modal-field-full">
+          <label>Notes <span className="optional">(optional)</span></label>
+          <div className="field-input-wrap field-textarea-wrap">
+            <span className="field-icon" style={{ top: '14px' }}>📝</span>
+            <textarea
+              name="notes"
+              value={form.notes}
+              onChange={handleChange}
+              placeholder="Any additional notes..."
+              rows={2}
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <div className="modal-actions">
+        <button type="button" className="btn-cancel" onClick={onClose}>
+          Cancel
+        </button>
+        <button type="submit" className="btn-primary" disabled={loading}>
+          {loading ? <span className="btn-spinner" /> : (editItem ? '💾' : '➕')}
+          {loading ? 'Saving...' : editItem ? 'Save Changes' : 'Add Item'}
+        </button>
+      </div>
+    </form>
+  )
+
+  // Inline mode — just the form, no overlay
+  if (inline) {
+    return <div className="inline-form-wrap">{FormContent}</div>
+  }
+
+  // Modal mode — overlay + panel
   return (
-    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+    <div
+      className="modal-overlay"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
+    >
       <div className="modal-panel fade-in">
         <div className="modal-header">
           <div>
@@ -55,73 +170,7 @@ const AddItemModal = ({ onClose, onSubmit, editItem, loading }) => {
           </div>
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
-
-        <form onSubmit={handleSubmit} className="modal-form">
-          <div className="modal-grid">
-            <div className={`modal-field modal-field-full ${errors.name ? 'field-error' : ''}`}>
-              <label>Item Name <span className="required">*</span></label>
-              <div className="field-input-wrap">
-                <span className="field-icon">🏷️</span>
-                <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="e.g. Whole Milk, Chicken Breast..." />
-              </div>
-              {errors.name && <span className="field-error-msg">{errors.name}</span>}
-            </div>
-
-            <div className={`modal-field ${errors.quantity ? 'field-error' : ''}`}>
-              <label>Quantity <span className="required">*</span></label>
-              <div className="field-input-wrap">
-                <span className="field-icon">🔢</span>
-                <input type="number" name="quantity" value={form.quantity} onChange={handleChange} placeholder="1" min="1" />
-              </div>
-              {errors.quantity && <span className="field-error-msg">{errors.quantity}</span>}
-            </div>
-
-            <div className="modal-field">
-              <label>Unit</label>
-              <div className="field-input-wrap">
-                <span className="field-icon">📐</span>
-                <select name="unit" value={form.unit} onChange={handleChange}>
-                  {UNITS.map(u => <option key={u} value={u}>{u}</option>)}
-                </select>
-              </div>
-            </div>
-
-            <div className={`modal-field ${errors.expiryDate ? 'field-error' : ''}`}>
-              <label>Expiry Date <span className="required">*</span></label>
-              <div className="field-input-wrap">
-                <span className="field-icon">📅</span>
-                <input type="date" name="expiryDate" value={form.expiryDate} onChange={handleChange} min={today} />
-              </div>
-              {errors.expiryDate && <span className="field-error-msg">{errors.expiryDate}</span>}
-            </div>
-
-            <div className="modal-field">
-              <label>Category</label>
-              <div className="field-input-wrap">
-                <span className="field-icon">🗂️</span>
-                <select name="category" value={form.category} onChange={handleChange}>
-                  {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                </select>
-              </div>
-            </div>
-
-            <div className="modal-field modal-field-full">
-              <label>Notes <span className="optional">(optional)</span></label>
-              <div className="field-input-wrap field-textarea-wrap">
-                <span className="field-icon" style={{ top: '14px' }}>📝</span>
-                <textarea name="notes" value={form.notes} onChange={handleChange} placeholder="Any additional notes..." rows={2} />
-              </div>
-            </div>
-          </div>
-
-          <div className="modal-actions">
-            <button type="button" className="btn-cancel" onClick={onClose}>Cancel</button>
-            <button type="submit" className="btn-primary" disabled={loading}>
-              {loading ? <span className="btn-spinner" /> : (editItem ? '💾' : '➕')}
-              {loading ? 'Saving...' : editItem ? 'Save Changes' : 'Add Item'}
-            </button>
-          </div>
-        </form>
+        {FormContent}
       </div>
     </div>
   )

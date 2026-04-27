@@ -1,9 +1,24 @@
+/* Inline form (used in Add Item page, no overlay) */
+.inline-form-wrap .modal-form {
+  padding: 0;
+}
+
+.inline-form-wrap .modal-actions {
+  border-top: 1px solid var(--gray-100);
+  padding-top: 20px;
+  margin-top: 8px;
+}
+
 .modal-overlay {
-  position: static;        
-  background: none;        
-  backdrop-filter: none;   
-  display: block;          
-  padding: 0;              
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .modal-panel {
@@ -14,9 +29,6 @@
   box-shadow: var(--shadow-xl);
   overflow: hidden;
   border: 1px solid var(--gray-100);
-  margin: 40px auto;       /* center nicely */
-  width: 100%;
-  max-width: 580px;
 }
 
 .modal-header {
